@@ -17,8 +17,11 @@ class ApiHandler(webapp2.RequestHandler):
         cluster_attrs = fetch_config[cluster_id]
 
         result = urlfetch.fetch(cluster_attrs['url'])
-        # appids = result.content.split('|')
-        appids = lib.getAppidFromINI(result.content)
+        urltype = cluster_attrs['urltype']
+        if (urltype) == 'ini':
+            appids = lib.getAppidFromINI(result.content)
+        elif (urltype) == 'txt':
+            appids = result.content.split('|')
 
         appid_dict = memcache.get_multi(appids)
 
