@@ -37,7 +37,7 @@
 2. 如何添加自定义监控列表
 
 监控列表配置文件示例：
-
+{
 config = {
     # cluster_id
     "wwqgtxx-goagent": {
@@ -55,7 +55,7 @@ config = {
     },
 }
 
-
+}
 在 fetch\_config.py 中，按照示例的格式加进去就好了。查询的时候，用 `cluster_id' 进行查询。如： [https://goagentmonitor.appspot.com/api/wwqgtxx-goagent](https://goagentmonitor.appspot.com/api/wwqgtxx-goagent)
 
 
