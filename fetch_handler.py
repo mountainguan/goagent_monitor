@@ -29,8 +29,12 @@ def defer_fetch(url, cluster_id, is_list=False):
     result = urlfetch.fetch(url)
 
     if is_list:
-        # appids = result.content.split('|')
-        appids = lib.getAppidFromINI(result.content)
+        cluster_attrs = fetch_config[cluster_id]
+        urltype = cluster_attrs['urltype']
+        if (urltype) == 'ini':
+            appids = lib.getAppidFromINI(result.content)
+        elif (urltype) == 'txt':
+            appids = result.content.split('|')
         for appid in appids:
             app_url = 'https://%s.appspot.com/2' % appid
             taskqueue.add(url='/start_fetch', params={'url': app_url, 'cluster_id': cluster_id})
