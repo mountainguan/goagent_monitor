@@ -23,20 +23,21 @@ class ApiHandler(webapp2.RequestHandler):
         elif (urltype) == 'txt':
             appids = result.content.split('|')
 
+
         appid_dict = memcache.get_multi(appids)
 
         response_dict = {
-            "available": [],
-            "over_quota": [],
+            "B_available": [],
+            "C_over_quota": [],
         }
 
         for appid, val in appid_dict.iteritems():
             if val is True:
-                response_dict['available'].append(appid)
+                response_dict['B_available'].append(appid)
             elif val is False:
-                response_dict['over_quota'].append(appid)
+                response_dict['C_over_quota'].append(appid)
 
-        response_dict['status_msg'] = "今日还剩 %dGB/%dGB 流量" % (len(response_dict['available']), len(appids))
+        response_dict['A_status_msg'] = "今日还剩 %dGB/%dGB 流量" % (len(response_dict['B_available']), len(appids))
 
         response_json = json.dumps(response_dict, ensure_ascii=False)
 
