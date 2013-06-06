@@ -4,7 +4,7 @@
 
 [《请问有人可以提供一个搭建在openshift(或者其他免费云平台)上的一个监测gae appid是否超出配额的源代码么？(供公共goagent服务端使用)》](http://www.v2ex.com/t/68495)
 
-使用示例：[https://goagentmonitor.appspot.com/api/wwqgtxx-goagent](https://goagentmonitor.appspot.com/api/wwqgtxx-goagent)
+使用示例：[https://goagentmonitor.appspot.com/api/wwqgtxx-goagent](https://goagentmonitor.appspot.com/api/wwqgtxx-goagent)，[https://goagentmonitor.appspot.com/page/wwqgtxx-goagent](https://goagentmonitor.appspot.com/page/wwqgtxx-goagent)
 
 ## 功能
 
@@ -13,9 +13,9 @@
 ### 返回的数据格式示例
 
     {
-      "available": ["wwqgtxxproxy12-4", "wwqgtxxproxy12-5", ...], # 可用的 Appid 列表
-      "over_quota": ["wwqgtxxproxy1-1", "wwqgtxxproxy20-10", ...], # 超出配额的 Appid 列表
-      "status_msg": "今日还剩 207GB/316GB 流量"
+      "A_status_msg": "今日还剩 207GB/316GB 流量"
+      "B_available": ["wwqgtxxproxy12-4", "wwqgtxxproxy12-5", ...], # 可用的 Appid 列表
+      "C_over_quota": ["wwqgtxxproxy1-1", "wwqgtxxproxy20-10", ...], # 超出配额的 Appid 列表
     }
 
 ### 爬虫工作明细
@@ -43,10 +43,12 @@
         "wwqgtxx-goagent": {
             "name": u"wwqgtxx-goagent's name", # cluster_name
             "url": "http://goagent.wwqgtxx-goagent.googlecode.com/git/goagent-local/proxy.ini", # get appids from this url
+            "urltype": "ini",  # this url type(ini or txt)
+            "message": "wwqgtxx-goagent",  #the message show in your web site
         },
     }
 
-在 fetch\_config.py 中，按照示例的格式加进去就好了。查询的时候，用 `cluster_id' 进行查询。如： [https://goagentmonitor.appspot.com/api/wwqgtxx-goagent](https://goagentmonitor.appspot.com/api/wwqgtxx-goagent)
+在 fetch\_config.py 中，按照示例的格式加进去就好了。查询的时候，用 `cluster_id' 进行查询。如： [https://goagentmonitor.appspot.com/api/wwqgtxx-goagent](https://goagentmonitor.appspot.com/api/wwqgtxx-goagent)，，[https://goagentmonitor.appspot.com/page/wwqgtxx-goagent](https://goagentmonitor.appspot.com/page/wwqgtxx-goagent)
 
 
 ## TODO
