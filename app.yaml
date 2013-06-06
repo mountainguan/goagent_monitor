@@ -16,3 +16,6 @@ handlers:
 - url: /api/?.*
   script: api_handler.app
 
+- url: /page/?.*
+  script: page_handler.app
+
