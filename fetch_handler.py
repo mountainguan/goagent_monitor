@@ -6,6 +6,8 @@ from google.appengine.api import memcache
 import logging
 import urlparse
 
+import time
+
 from fetch_config import config as fetch_config
 import lib
 
@@ -25,8 +27,13 @@ class FetchHandler(webapp2.RequestHandler):
 def defer_fetch(url, cluster_id, is_list=False):
 
     logging.info('fetching...%s' % url)
-
-    result = urlfetch.fetch(url)
+    try:
+        result = urlfetch.fetch(url)
+    except Exception as e:
+        logging.error(e)
+        time.sleep(1)
+        defer_fetch(url, cluster_id, is_list)
+        return
 
     if is_list:
         cluster_attrs = fetch_config[cluster_id]
@@ -48,3 +55,4 @@ def defer_fetch(url, cluster_id, is_list=False):
 app = webapp2.WSGIApplication([
     ('/start_fetch', FetchHandler)
 ], debug=True)
+
