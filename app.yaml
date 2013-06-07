@@ -19,3 +19,6 @@ handlers:
 - url: /page/?.*
   script: page_handler.app
 
+- url: /
+  script: index_handler.app
+
