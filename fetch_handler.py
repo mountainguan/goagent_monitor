@@ -30,10 +30,7 @@ def defer_fetch(url, cluster_id, is_list=False):
     try:
         result = urlfetch.fetch(url)
     except Exception as e:
-        logging.error(e)
-        time.sleep(1)
-        defer_fetch(url, cluster_id, is_list)
-        return
+        result.status_code == 503
 
     if is_list:
         cluster_attrs = fetch_config[cluster_id]
@@ -43,7 +40,7 @@ def defer_fetch(url, cluster_id, is_list=False):
         elif (urltype) == 'txt':
             appids = result.content.split('|')
         for appid in appids:
-            app_url = 'https://%s.appspot.com/2' % appid
+            app_url = 'http://%s.appspot.com/2' % appid
             taskqueue.add(url='/start_fetch', params={'url': app_url, 'cluster_id': cluster_id})
     else:
         appid = urlparse.urlparse(url).netloc.split('.')[0]
