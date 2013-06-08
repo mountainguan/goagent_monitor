@@ -27,10 +27,17 @@ class FetchHandler(webapp2.RequestHandler):
 def defer_fetch(url, cluster_id, is_list=False):
 
     logging.info('fetching...%s' % url)
+
     try:
         result = urlfetch.fetch(url)
+        status_code = result.status_code
     except Exception as e:
-        result.status_code == 503
+        if is_list:
+            defer_fetch(url, cluster_id, is_list=False)
+            return
+        else:
+            status_code = 503
+            
 
     if is_list:
         cluster_attrs = fetch_config[cluster_id]
@@ -44,7 +51,7 @@ def defer_fetch(url, cluster_id, is_list=False):
             taskqueue.add(url='/start_fetch', params={'url': app_url, 'cluster_id': cluster_id})
     else:
         appid = urlparse.urlparse(url).netloc.split('.')[0]
-        if result.status_code == 503:
+        if status_code == 503:
             memcache.set(appid, False)
         else:
             memcache.set(appid, True)
@@ -52,3 +59,4 @@ def defer_fetch(url, cluster_id, is_list=False):
 app = webapp2.WSGIApplication([
     ('/start_fetch', FetchHandler)
 ], debug=True)
+
