@@ -33,10 +33,13 @@ def defer_fetch(url, cluster_id, is_list=False):
         status_code = result.status_code
     except Exception as e:
         if is_list:
-            defer_fetch(url, cluster_id, is_list=False)
+            logging.error(e)
+            defer_fetch(url, cluster_id, is_list)
             return
         else:
-            status_code = 503
+            logging.error(e)
+            taskqueue.add(url='/start_fetch', params={'url': url, 'cluster_id': cluster_id})
+            return
             
 
     if is_list:
