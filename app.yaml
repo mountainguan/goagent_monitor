@@ -13,6 +13,10 @@ handlers:
   script: fetch_handler.app
   login: admin
 
+- url: /start_email
+  script: email_handler.app
+  login: admin
+
 - url: /api/?.*
   script: api_handler.app
 

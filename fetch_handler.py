@@ -62,4 +62,3 @@ def defer_fetch(url, cluster_id, is_list=False):
 app = webapp2.WSGIApplication([
     ('/start_fetch', FetchHandler)
 ], debug=True)
-
