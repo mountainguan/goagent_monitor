@@ -9,20 +9,12 @@ import json
 
 
 from fetch_config import config as fetch_config
-import lib
+import list_handler
 
 def getApi(cluster_id):
-	cluster_attrs = fetch_config[cluster_id]
+	appids = list_handler.get_list(cluster_id)
 
-	result = urlfetch.fetch(cluster_attrs['url'])
-	urltype = cluster_attrs['urltype']
-	if (urltype) == 'ini':
-		appids = lib.getAppidFromINI(result.content)
-	elif (urltype) == 'txt':
-		appids = result.content.split('|')
-
-
-	appid_dict = memcache.get_multi(appids)
+	appid_dict = memcache.get_multi(appids,'',cluster_id)
 
 	response_dict = {
 		"B_available": [],
@@ -37,14 +29,13 @@ def getApi(cluster_id):
 
 	response_dict['A_status_msg'] = "今日还剩 %dGB/%dGB 流量" % (len(response_dict['B_available']), len(appids))
 
-	response_json = json.dumps(response_dict, ensure_ascii=False)
-
-	return response_json
+	return response_dict
 
 
 class ApiHandler(webapp2.RequestHandler):
 	def get(self, cluster_id=None):
-		self.response.write(getApi(cluster_id))
+		response_json = json.dumps(getApi(cluster_id), ensure_ascii=False)
+		self.response.write(response_json)
 
 
 app = webapp2.WSGIApplication([

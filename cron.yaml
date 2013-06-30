@@ -2,11 +2,19 @@ cron:
 - description: Check healthy of Appid list per 15 mins
   url: /start_fetch
   schedule: every 15 minutes
-- description: Send Email About Appid Message EveryDay(23:00)
+- description: Update Appid List EveryDay - 1(00:05)
+  url: /start_list
+  schedule: every day 00:05
+  timezone: America/Los_Angeles 
+- description: Update Appid List EveryDay - 1(00:15)
+  url: /start_list
+  schedule: every day 00:15
+  timezone: America/Los_Angeles 
+- description: Send Email About Appid Message EveryDay - 1(23:00)
   url: /start_email
   schedule: every day 23:00
   timezone: America/Los_Angeles 
-- description: Send Email About Appid Message EveryDay(23:30)
+- description: Send Email About Appid Message EveryDay - 2(23:30)
   url: /start_email
   schedule: every day 23:30
   timezone: America/Los_Angeles 

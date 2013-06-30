@@ -1,4 +1,4 @@
-application: goagentmonitor
+application: wwqgtxx-monitor
 version: 1
 runtime: python27
 api_version: 1
@@ -11,6 +11,10 @@ handlers:
 
 - url: /start_fetch
   script: fetch_handler.app
+  login: admin
+
+- url: /start_list
+  script: list_handler.app
   login: admin
 
 - url: /start_email

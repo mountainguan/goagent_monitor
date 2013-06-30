@@ -9,7 +9,8 @@ import json
 
 
 from fetch_config import config as fetch_config
-import lib
+import list_handler
+import api_handler
 
 
 def getPage(cluster_id):
@@ -83,31 +84,15 @@ body {
 
 '''
 	cluster_attrs = fetch_config[cluster_id]
-
 	result = urlfetch.fetch(cluster_attrs['url'])
 	urltype = cluster_attrs['urltype']
 	name = cluster_attrs['name'].encode('utf8')
 	message = cluster_attrs['message'].encode('utf8')
-	if (urltype) == 'ini':
-		appids = lib.getAppidFromINI(result.content)
-	elif (urltype) == 'txt':
-		appids = result.content.split('|')
+	
+	appids = list_handler.get_list(cluster_id)
+	
+	response_dict = api_handler.getApi(cluster_id)
 
-
-	appid_dict = memcache.get_multi(appids)
-
-	response_dict = {
-		"B_available": [],
-		"C_over_quota": [],
-	}
-
-	for appid, val in appid_dict.iteritems():
-		if val is True:
-			response_dict['B_available'].append(appid)
-		elif val is False:
-			response_dict['C_over_quota'].append(appid)
-
-	response_dict['A_status_msg'] = "今日还剩 %dGB/%dGB 流量" % (len(response_dict['B_available']), len(appids))
 
 	PAGE = PAGE0+ name + PAGE1 + name + '	' + response_dict['A_status_msg'] + PAGE2 + '%f'%((float(len(response_dict['B_available']))/float(len(appids)))*100) + PAGE3 + message + PAGE4
 	return PAGE
