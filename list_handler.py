@@ -8,7 +8,7 @@ import urlparse
 
 import time
 
-from fetch_config import config as fetch_config
+from monitor_config import config as monitor_config
 
 import ConfigParser
 import StringIO
@@ -24,7 +24,7 @@ def getAppidFromINI(file_content):
 
 class ListHandler(webapp2.RequestHandler):
 	def get(self):
-		for cluster_id, cluster_attrs in fetch_config.iteritems():
+		for cluster_id, cluster_attrs in monitor_config.iteritems():
 			taskqueue.add(url='/start_list', params={'cluster_id': cluster_id})
 
 		self.response.write('start fetching list...')
@@ -34,7 +34,7 @@ class ListHandler(webapp2.RequestHandler):
 
 
 def make_list(cluster_id):
-	cluster_attrs = fetch_config[cluster_id]
+	cluster_attrs = monitor_config[cluster_id]
 	urltype = cluster_attrs['urltype']
 	url = cluster_attrs['url']
 	logging.info('fetching list...%s' % url)
@@ -59,6 +59,9 @@ def get_list(cluster_id):
 	if(appids is None or appids == {}):
 		make_list(cluster_id)
 		return get_list(cluster_id)
+#	for appid in appids:
+#		if(memcache.get(appid, cluster_id) is False):
+#			memcache.set(appid, True, 0, 0, cluster_id)
 	return appids
 
 

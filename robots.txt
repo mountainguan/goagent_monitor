@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /start_fetch
+Disallow: /start_list
+Disallow: /start_email
+Allow: /api/?.*
+Allow: /page/?.*

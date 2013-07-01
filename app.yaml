@@ -30,3 +30,8 @@ handlers:
 - url: /
   script: index_handler.app
 
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+
+

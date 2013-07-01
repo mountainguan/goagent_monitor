@@ -8,14 +8,14 @@ import urlparse
 
 import time
 
-from fetch_config import config as fetch_config
+from monitor_config import config as monitor_config
 import list_handler
 import api_handler
 
 
 class FetchHandler(webapp2.RequestHandler):
 	def get(self):
-		for cluster_id, cluster_attrs in fetch_config.iteritems():
+		for cluster_id, cluster_attrs in monitor_config.iteritems():
 			taskqueue.add(url='/start_fetch', params={'url': cluster_attrs['url'], 'cluster_id': cluster_id, 'is_list': True})
 
 		self.response.write('start fetching...')
@@ -44,9 +44,10 @@ def defer_fetch(url, cluster_id, is_list=False):
 			
 
 	if is_list:
-		cluster_attrs = fetch_config[cluster_id]
-		response_dict = api_handler.getApi(cluster_id)
-		appids = response_dict['B_available']
+		#cluster_attrs = monitor_config[cluster_id]
+		#response_dict = api_handler.getApi(cluster_id)
+		#appids = response_dict['B_available']
+		appids = list_handler.get_list(cluster_id)
 		for appid in appids:
 			app_url = 'http://%s.appspot.com/2' % appid
 			taskqueue.add(url='/start_fetch', params={'url': app_url, 'cluster_id': cluster_id})

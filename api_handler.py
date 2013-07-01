@@ -8,7 +8,7 @@ from google.appengine.api import memcache
 import json
 
 
-from fetch_config import config as fetch_config
+from monitor_config import config as monitor_config
 import list_handler
 
 def getApi(cluster_id):
