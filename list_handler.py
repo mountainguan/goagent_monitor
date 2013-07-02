@@ -59,6 +59,7 @@ def get_list(cluster_id):
 	if(appids is None or appids == {}):
 		make_list(cluster_id)
 		return get_list(cluster_id)
+	memcache.set(cluster_id, appids, 0, 0, 'List')
 #	for appid in appids:
 #		if(memcache.get(appid, cluster_id) is False):
 #			memcache.set(appid, True, 0, 0, cluster_id)

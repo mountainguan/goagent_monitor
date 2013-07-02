@@ -2,9 +2,6 @@ cron:
 - description: Check healthy of Appid list per 15 mins
   url: /start_fetch
   schedule: every 15 minutes
-- description: Update Appid List per 30 mins
-  url: /start_list
-  schedule: every 30 minutes
 - description: Update Appid List EveryDay - 1(00:05)
   url: /start_list
   schedule: every day 00:05
