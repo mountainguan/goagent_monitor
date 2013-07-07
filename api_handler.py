@@ -31,10 +31,14 @@ def getApi(cluster_id):
 
 	return response_dict
 
+def getJson(cluster_id):
+	response_json = json.dumps(getApi(cluster_id), ensure_ascii=False)
+	return response_json
+
 
 class ApiHandler(webapp2.RequestHandler):
 	def get(self, cluster_id=None):
-		response_json = json.dumps(getApi(cluster_id), ensure_ascii=False)
+		response_json = getJson(cluster_id)
 		self.response.write(response_json)
 
 
