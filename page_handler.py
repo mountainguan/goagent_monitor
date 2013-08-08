@@ -62,6 +62,8 @@ body {
     </table></td>
   </tr>
 </table>
+<p>流量会在<a href="https://zh.wikipedia.org/zh-cn/%E5%A4%AA%E5%B9%B3%E6%B4%8B%E6%97%B6%E5%8C%BA">加州时间</a>每日 0:00 重置</p>
+<span>现在的加州时间为：</span><div style="position:relative;width:200px;"><iframe src="https://zh.thetimenow.com/clock/united_states/california/san_francisco?t=n&amp;embed=1&amp;text=16&amp;textdate=15&amp;format=24&amp;digitalclock=36&amp;analogclock=60&amp;letter_spacing=-0&amp;bordersize=0&amp;bordercolor=fffffff&amp;bgcolor=FFFFFF&amp;colorloc=ffffff&amp;colordigital=000000&amp;colordate=000000&amp;styleloc=normal&amp;styledigital=normal&amp;styledate=normal&amp;right=0" width="200" height="80"style="border:none;overflow:hidden;" scrolling="no"></iframe></div>
   <tr>
     <td colspan="3" align="center" valign="top">
 '''
