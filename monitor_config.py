@@ -2,12 +2,12 @@
 
 config = {
 	# cluster_id
-	"greatagent-ga": {
-		"name": u"greatagent-ga翻墙包",  # cluster_name
+	"greatagent-wp": {
+		"name": u"greatagent-wp翻墙包",  # cluster_name
 		# "url": "https://wwqgtxx-goagent.googlecode.com/git/Appid.txt", # get appids from this url
-		"url": "https://raw.github.com/greatagent2/ga/master/goagent-local/proxy.ini",  # get appids from this url
+		"url": "https://raw.github.com/greatagent/wp2/master/wallproxy-local/proxy.ini",  # get appids from this url
 		"urltype": "ini",  # this url type(ini or txt)
-		"message": "greatagent-ga",  #the message show in your web site
+		"message": "greatagent-wp",  #the message show in your web site
 		"email" : "wwqgtxx"+"@"+"gmail.com", #the message send to your email
 	},
 }
@@ -21,7 +21,7 @@ google_analytics_code = """
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-41954718-6', 'greatagent-ga.appspot.com');
+  ga('create', 'UA-41954718-7', 'greatagent-wp.appspot.com');
   ga('send', 'pageview');
 
 </script>
