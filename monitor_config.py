@@ -5,7 +5,7 @@ config = {
 	"greatagent-ga": {
 		"name": u"greatagent-ga翻墙包",  # cluster_name
 		# "url": "https://wwqgtxx-goagent.googlecode.com/git/Appid.txt", # get appids from this url
-		"url": "https://raw.github.com/greatagent2/ga/master/goagent-local/proxy.ini",  # get appids from this url
+		"url": "https://raw.github.com/greatagent2/ga/master/goagent-local/proxy.user.ini",  # get appids from this url
 		"urltype": "ini",  # this url type(ini or txt)
 		"message": "greatagent-ga",  #the message show in your web site
 		"email" : "wwqgtxx"+"@"+"gmail.com", #the message send to your email
