@@ -5,7 +5,7 @@ config = {
 	"greatagent-wp": {
 		"name": u"greatagent-wp翻墙包",  # cluster_name
 		# "url": "https://wwqgtxx-goagent.googlecode.com/git/Appid.txt", # get appids from this url
-		"url": "https://raw.github.com/greatagent/wp2/master/wallproxy-local/proxy.ini",  # get appids from this url
+		"url": "https://raw.github.com/greatagent/wp2/master/wallproxy-local/user.ini",  # get appids from this url
 		"urltype": "ini",  # this url type(ini or txt)
 		"message": "greatagent-wp",  #the message show in your web site
 		"email" : "wwqgtxx"+"@"+"gmail.com", #the message send to your email
